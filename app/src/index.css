@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Spline+Sans:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --bg: #f7f2e9;
+  --surface: #ffffff;
+  --ink: #121312;
+  --muted: #5b5e63;
+  --accent: #0f766e;
+  --accent-2: #f26419;
+  --accent-3: #264653;
+  --ring: #ffe6b3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background-image:
+    radial-gradient(900px 500px at 10% -10%, rgba(242, 100, 25, 0.18), transparent 60%),
+    radial-gradient(700px 460px at 90% -20%, rgba(15, 118, 110, 0.18), transparent 60%),
+    linear-gradient(180deg, #f7f2e9 0%, #f3efe6 100%),
+    repeating-linear-gradient(90deg, rgba(18, 19, 18, 0.04) 0 1px, transparent 1px 80px),
+    repeating-linear-gradient(0deg, rgba(18, 19, 18, 0.04) 0 1px, transparent 1px 80px);
+  background-attachment: fixed;
+}
+
+a {
+  color: inherit;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: none;
+}
+
+::selection {
+  background: rgba(242, 100, 25, 0.28);
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/75 backdrop-blur-xl border border-white/50 shadow-soft;
+  }
+
+  .panel {
+    @apply rounded-3xl border border-black/5 bg-white shadow-soft;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+
+.animate-rise {
+  animation: rise 0.6s ease-out both;
+}

@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  api:
+    build:
+      context: ./api
+    environment:
+      PORT: 4000
+      MONGODB_URI: mongodb://mongo:27017/smart-leads
+      JWT_SECRET: replace_me
+      JWT_EXPIRES_IN: 7d
+      ADMIN_SEED_KEY: replace_me
+      NODE_ENV: production
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongo
+
+  app:
+    build:
+      context: ./app
+      args:
+        VITE_API_URL: http://localhost:4000/api
+    ports:
+      - "4173:4173"
+    depends_on:
+      - api
+
+volumes:
+  mongo_data:
